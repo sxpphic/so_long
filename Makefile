@@ -2,6 +2,11 @@ NAME = so_long
 
 SRC = so_long.c
 
+OBJ			= $(SRC:.c=.o)
+
+%.o: %.c
+	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
+
 CFLAGS = -Wall -Wextra -Werror
 CFLAGS += -Lmlx -lmlx -framework OpenGL -framework AppKit -lz
 
@@ -15,8 +20,6 @@ $(NAME):	$(SRC) $(MLX_PATH)
 				$(CC) $(CFLAGS) $(SRC) $(MLX_PATH) -o $(NAME)
 
 $(MLX_PATH):
-				make -C ./mms
-				mv ./mms/libmlx.dylib .
 				make -C ./mlx
 
 all:	$(NAME)
@@ -24,7 +27,6 @@ all:	$(NAME)
 clean:
 		$(RM) $(NAME)
 		make clean -C ./mlx
-		make clean -C ./mms
 
 fclean: clean
 			$(RM) libmlx.dylib
