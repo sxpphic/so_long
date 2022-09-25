@@ -8,19 +8,29 @@ OBJ			= $(SRC:.c=.o)
 	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
 
 CFLAGS = -Wall -Wextra -Werror
-CFLAGS += -Lmlx -lmlx -framework OpenGL -framework AppKit -lz
+#CFLAGS += -Lmlx -lmlx -framework OpenGL -framework AppKit -lz
 
 CC = cc
 
 RM = rm -f
 
-MLX_PATH = ./mlx/libmlx.a
+MLX = ./mlx/libmlx.a
+
+MLX_LINUX = ./mlx_linux/libmlx.a
+
+INCLUDE_L= -L ./mlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
 $(NAME):	$(SRC) $(MLX_PATH)
 				$(CC) $(CFLAGS) $(SRC) $(MLX_PATH) -o $(NAME)
 
+linux:		$(SRC) $(MLX_LINUX)
+				$(CC) $(CFLAGS) $(SRC) $(INCLUDE_L) -o $(NAME)
+
 $(MLX_PATH):
 				make -C ./mlx
+
+$(MLX_LINUX):
+		make -C ./mlx_linux
 
 all:	$(NAME)
 
