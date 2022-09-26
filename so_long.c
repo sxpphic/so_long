@@ -6,11 +6,11 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:14:39 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/25 11:28:01 by sphh             ###   ########.fr       */
+/*   Updated: 2022/09/26 09:35:47 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
+#include "mlx/mlx.h"
 
 int	main(void)
 {
