@@ -6,32 +6,47 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:14:39 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/27 14:47:16 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/27 15:33:52 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	put_sprite(t_window *win, char *path, int x, int y)
+void	print_map(t_window *win)
 {
-	void	*img;
-	int		img_width;
-	int		img_height;
+	int	i;
+	int	j;
+	int	x;
+	int	y;
 
-	img = mlx_xpm_file_to_image(win->mlx, path, &img_width, &img_height);
-	mlx_put_image_to_window(win->mlx, win->mlx_win, img, x, y);
+	i = 0;
+	j = 0;
+	x = 0;
+	y = 0;
+	//while (win->map[j][i] != '\n')
+	while (win->map[j] != NULL)
+	{
+		if (win->map[j][i] == '1')
+			put_sprite(win, "./assets/wall64.xpm", x, y);
+		else if (win->map[j][i] == '0')
+			put_sprite(win, "./assets/ground64.xpm", x, y);
+		else if (win->map[j][i] == 'P')
+			put_sprite(win, "./assets/player64.xpm", x, y);
+		else if (win->map[j][i] == 'C')
+			put_sprite(win, "./assets/colect64.xpm", x, y);
+		else if (win->map[j][i] == 'E')
+			put_sprite(win, "./assets/exit64.xpm", x, y);
+		x += 64;
+		i++;
+		if (win->map[j][i] == '\n')
+		{
+			j++;
+			i = 0;
+			y += 64;
+			x = 0;
+		}
+	}
 }
-/*
-void	put_sprite(t_window *win, char *path)
-{
-	t_data	img;
-	int		img_width;
-	int		img_height;
-
-	img.img = mlx_xpm_file_to_image(win->mlx, path, &img_width, &img_height);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	mlx_put_image_to_window(win->mlx, win->mlx_win, img.img, 0, 0);
-}*/
 
 int	main(int argc, char *argv[])
 {
@@ -40,10 +55,9 @@ int	main(int argc, char *argv[])
 	if (argc != 2 || map_name(argv[1]))
 		return (write(2, "error\n", 6));
 	win.mlx = mlx_init();
-	win.mlx_win = mlx_new_window(win.mlx, 500, 500, "so_long");
+	win.mlx_win = mlx_new_window(win.mlx, 1000, 400, "so_long");
 	win.map = map_create(argv[1]);
-	put_sprite(&win, "./assets/wall64.xpm", 0, 0);
-	put_sprite(&win, "./assets/wall64.xpm", 15, 0);
+	print_map(&win);
 	ft_printf("teste");
 
 	mlx_loop(win.mlx);

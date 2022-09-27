@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:09:41 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/27 12:20:24 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/27 14:48:52 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,14 @@ char	**map_create(char	*map_path)
 	}
 	close(fd);
 	return (map);
+}
+
+void	put_sprite(t_window *win, char *path, int x, int y)
+{
+	void	*img;
+	int		img_width;
+	int		img_height;
+
+	img = mlx_xpm_file_to_image(win->mlx, path, &img_width, &img_height);
+	mlx_put_image_to_window(win->mlx, win->mlx_win, img, x, y);
 }
