@@ -1,6 +1,7 @@
 NAME = so_long
 
-SRC = so_long.c
+SRC = so_long.c\
+	  utils.c
 
 OBJ			= $(SRC:.c=.o)
 

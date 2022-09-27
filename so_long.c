@@ -6,29 +6,21 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:14:39 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/27 11:06:54 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/27 12:20:47 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	map_name(char	*map)
-{
-	char	*check;
-
-	check = ft_strrchr(map, '.');
-	if (check == 0)
-		return (1);
-	if (ft_strncmp(check, ".ber", ft_strlen(check)))
-		return (1);
-	return (0);
-}
-
 int	main(int argc, char *argv[])
 {
+	char	**map;
+
 	if (argc != 2 || map_name(argv[1]))
 		return (write(2, "error\n", 6));
-
+	map = map_create(argv[1]);
+	
+	return (0);
 }
 
 /*
