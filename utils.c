@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:09:41 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/27 16:59:04 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/27 17:25:12 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	put_sprite(t_window *win, char *path, int x, int y)
 	int		img_height;
 
 	img = mlx_xpm_file_to_image(win->mlx, path, &img_width, &img_height);
-	mlx_put_image_to_window(win->mlx, win->mlx_win, img, x, y);
+	mlx_put_image_to_window(win->mlx, win->win, img, x, y);
 }
 
 void	set_values(int *i, int *j, int *x, int *y)
@@ -100,4 +100,16 @@ void	print_map(t_window *win)
 	}
 }
 
+void	create_win(t_window *win)
+{
+	int	x;
+	int	y;
 
+	x = 0;
+	y = 0;
+	while (win->map[0][x] != '\n')
+		x++;
+	while (win->map[y] != NULL)
+		y++;
+	win->win = mlx_new_window(win->mlx, (x * 64), (y * 64), "so_long");
+}

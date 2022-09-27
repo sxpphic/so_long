@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 10:03:01 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/27 16:59:01 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/27 17:24:18 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct	s_data {
 typedef struct s_window {
 	char	**map;
 	void	*mlx;
-	void	*mlx_win;
+	void	*win;
 }				t_window;
 
 /* validation functions */
@@ -40,5 +40,6 @@ void	put_sprite(t_window *win, char *path, int x, int y);
 void	initialize_line_row(int *i, int *j, int *x, int *y);
 void	set_values(int *i, int *j, int *x, int *y);
 void	print_map(t_window *win);
+void	create_win(t_window *win);
 
 
