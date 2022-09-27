@@ -17,16 +17,21 @@ CC = cc
 
 RM = rm -f
 
+LIBFT = ./libft/libft.a
+
 MLX = ./mlx/libmlx.a
 
 MLX_LINUX = ./mlx_linux/libmlx.a
 
 
-$(NAME):	$(SRC) $(MLX)
-				$(CC) $(CFLAGS) $(SRC) $(INCLUDE_M) -o $(NAME)
+$(NAME):	$(SRC) $(MLX) $(LIBFT)
+				$(CC) $(CFLAGS) $(SRC) $(LIBFT) $(INCLUDE_M) -o $(NAME)
 
-linux:		$(SRC) $(MLX_LINUX)
-				$(CC) $(CFLAGS) $(SRC) $(INCLUDE_L) -o $(NAME)
+linux:		$(SRC) $(MLX_LINUX) $(LIBFT)
+				$(CC) $(CFLAGS) $(SRC) $(LIBFT) $(INCLUDE_L) -o $(NAME)
+
+$(LIBFT)
+			make -C ./libft
 
 $(MLX):
 			make -C ./mlx
@@ -39,9 +44,11 @@ all:	$(NAME)
 clean:
 		$(RM) $(NAME)
 		make clean -C ./mlx
+		make clean -C ./libft
 
 fclean: clean
 		$(RM) $(NAME)
+		make fclean -C ./libft
 
 re: fclean all
 
