@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 10:03:01 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/27 12:23:03 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/27 14:30:03 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ typedef struct	s_data {
 	int		endian;
 }				t_data;
 
-typedef struct s_map {
+typedef struct s_window {
 	char	**map;
-}				t_map;
+	void	*mlx;
+	void	*mlx_win;
+}				t_window;
 
 /* validation functions */
 
