@@ -30,7 +30,7 @@ $(NAME):	$(SRC) $(MLX) $(LIBFT)
 linux:		$(SRC) $(MLX_LINUX) $(LIBFT)
 				$(CC) $(CFLAGS) $(SRC) $(LIBFT) $(INCLUDE_L) -o $(NAME)
 
-$(LIBFT)
+$(LIBFT):
 			make -C ./libft
 
 $(MLX):

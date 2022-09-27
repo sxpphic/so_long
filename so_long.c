@@ -6,20 +6,32 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:14:39 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/27 09:08:58 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/27 11:06:54 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+int	map_name(char	*map)
 {
-	char	*dst;
+	char	*check;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+	check = ft_strrchr(map, '.');
+	if (check == 0)
+		return (1);
+	if (ft_strncmp(check, ".ber", ft_strlen(check)))
+		return (1);
+	return (0);
 }
 
+int	main(int argc, char *argv[])
+{
+	if (argc != 2 || map_name(argv[1]))
+		return (write(2, "error\n", 6));
+
+}
+
+/*
 int	main(void)
 {
 
@@ -31,6 +43,7 @@ int	main(void)
 	int		img_height;
 
 
+	ft_printf("teste");
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, 500, 500, "Hello world!");
 	img.img = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);
@@ -41,4 +54,4 @@ int	main(void)
 
 }
 
-
+*/
