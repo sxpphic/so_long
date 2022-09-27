@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 10:03:01 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/27 14:49:48 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/27 16:59:01 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef struct s_window {
 }				t_window;
 
 /* validation functions */
-
 int	map_name(char	*map);
 char	**map_create(char	*map_path);
 
@@ -37,5 +36,9 @@ char	**map_create(char	*map_path);
 void	put_sprite(t_window *win, char *path, int x, int y);
 
 
+/* print map funcs */
+void	initialize_line_row(int *i, int *j, int *x, int *y);
+void	set_values(int *i, int *j, int *x, int *y);
+void	print_map(t_window *win);
 
 

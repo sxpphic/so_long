@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:09:41 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/27 14:48:52 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/27 16:59:04 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,3 +56,48 @@ void	put_sprite(t_window *win, char *path, int x, int y)
 	img = mlx_xpm_file_to_image(win->mlx, path, &img_width, &img_height);
 	mlx_put_image_to_window(win->mlx, win->mlx_win, img, x, y);
 }
+
+void	set_values(int *i, int *j, int *x, int *y)
+{
+	(*i) = 0;
+	(*j)++;
+	(*y) += 64;
+	(*x) = 0;
+}
+
+void	initialize_line_row(int *i, int *j, int *x, int *y)
+{
+	(*i) = 0;
+	(*j) = 0;
+	(*y) = 0;
+	(*x) = 0;
+}
+
+void	print_map(t_window *win)
+{
+	int	i;
+	int	j;
+	int	x;
+	int	y;
+
+	initialize_line_row(&i, &j, &x, &y);
+	while (win->map[j] != NULL)
+	{
+		if (win->map[j][i] == '1')
+			put_sprite(win, "./assets/wall64.xpm", x, y);
+		else if (win->map[j][i] == '0')
+			put_sprite(win, "./assets/ground64.xpm", x, y);
+		else if (win->map[j][i] == 'P')
+			put_sprite(win, "./assets/player64.xpm", x, y);
+		else if (win->map[j][i] == 'C')
+			put_sprite(win, "./assets/colect64.xpm", x, y);
+		else if (win->map[j][i] == 'E')
+			put_sprite(win, "./assets/exit64.xpm", x, y);
+		x += 64;
+		i++;
+		if (win->map[j][i] == '\n')
+			set_values(&i, &j, &x, &y);
+	}
+}
+
+
