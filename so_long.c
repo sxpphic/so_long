@@ -6,11 +6,31 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:14:39 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/27 17:39:59 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/27 18:02:15 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+/*
+void	player_possition(t_window win)
+{
+	int	i;
+	int j;
+
+	while (win->map[j] != NULL)
+	{
+		if (win->map[j][i] == 'P')
+			return ()
+		if (win->map[j][i] == '\n')
+			set_values(&i, &j, &x, &y);
+	}
+}
+*/
+
+char	*modify_row(void)
+{
+	return ("11111000111\n");
+}
 
 int	key_hook(int keycode, t_window *win)
 {
@@ -22,7 +42,11 @@ int	key_hook(int keycode, t_window *win)
 	else if (keycode == 1)
 		ft_printf("s", keycode);
 	else if (keycode == 2)
+	{
 		ft_printf("d", keycode);
+		win->map[0] = modify_row();
+	}
+	print_map(win);
 	return (0);
 }
 
