@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:09:41 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/28 11:53:23 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/28 14:54:15 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	**map_create(char	*map_path)
 	return (map);
 }
 
-void	put_sprite(t_window *win, char *path, int x, int y)
+int	put_sprite(t_window *win, char *path, int x, int y)
 {
 	void	*img;
 	int		img_width;
@@ -56,6 +56,7 @@ void	put_sprite(t_window *win, char *path, int x, int y)
 	img = mlx_xpm_file_to_image(win->mlx, path, &img_width, &img_height);
 	mlx_put_image_to_window(win->mlx, win->win, img, x, y);
 	mlx_destroy_image(win->mlx, img);
+	return (1);
 }
 
 void	set_values(int *i, int *j, int *x, int *y)
@@ -91,7 +92,7 @@ void	print_map(t_window *win)
 		else if (win->map[j][i] == 'P')
 			put_sprite(win, "./assets/player64.xpm", x, y);
 		else if (win->map[j][i] == 'C')
-			put_sprite(win, "./assets/colect64.xpm", x, y);
+			win->colect += put_sprite(win, "./assets/colect64.xpm", x, y);
 		else if (win->map[j][i] == 'E')
 			put_sprite(win, "./assets/exit64.xpm", x, y);
 		x += 64;

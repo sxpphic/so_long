@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:14:39 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/28 13:42:38 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/28 15:02:20 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,24 +56,52 @@ char	*step_up(t_window *win)
 	new_row[i] = '\n';
 	i++;
 	new_row[i] = '\0';
-	//free(win->map[win->p_y - 1]);
 	win->map[win->p_y - 1] = new_row;
 	return (remove_player(win));
 }
 
+char	*step_down(t_window *win)
+{
+	char	*new_row;
+	int	i;
+
+	i = 0;
+	ft_printf("s");
+	if (win->map[win->p_y + 1][win->p_x] == '1')
+		return (win->map[win->p_y]);
+	new_row = ft_calloc(sizeof(char) * (win->line_length + 2), 1); 
+	while (win->map[win->p_y + 1][i] != '\n')
+	{
+		if (i == win->p_x)
+			new_row[i] = 'P';
+		else
+			new_row[i] = win->map[win->p_y + 1][i];
+		i++;
+	}
+	new_row[i] = '\n';
+	i++;
+	new_row[i] = '\0';
+	win->map[win->p_y + 1] = new_row;
+	return (remove_player(win));
+}
 
 int	key_hook(int keycode, t_window *win)
 {
-	(void)win;
+	static int	count;
+
 	player_possition(win);
 	if (keycode == 13)
 			win->map[win->p_y] = step_up(win);
 	else if (keycode == 0)
 		win->map[win->p_y] = step_right(win);
 	else if (keycode == 1)
-		ft_printf("s", keycode);
+			win->map[win->p_y] = step_down(win);
 	else if (keycode == 2)
 		win->map[win->p_y] = step_left(win);
+	else if (keycode == 53)
+		exit(0);
+	count++;
+	ft_printf(" %i\n", count);
 	print_map(win);
 	return (0);
 }
