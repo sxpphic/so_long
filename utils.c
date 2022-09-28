@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:09:41 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/28 16:52:00 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/28 17:41:41 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	**map_create(char	*map_path)
 	return (map);
 }
 
-int	put_sprite(t_window *win, char *path, int x, int y)
+void	put_sprite(t_window *win, char *path, int x, int y)
 {
 	void	*img;
 	int		img_width;
@@ -56,7 +56,6 @@ int	put_sprite(t_window *win, char *path, int x, int y)
 	img = mlx_xpm_file_to_image(win->mlx, path, &img_width, &img_height);
 	mlx_put_image_to_window(win->mlx, win->win, img, x, y);
 	mlx_destroy_image(win->mlx, img);
-	return (1);
 }
 
 void	set_values(int *i, int *j, int *x, int *y)
@@ -92,7 +91,7 @@ void	print_map(t_window *win)
 		else if (win->map[j][i] == 'P')
 			put_sprite(win, "./assets/player64.xpm", x, y);
 		else if (win->map[j][i] == 'C')
-			win->colect += put_sprite(win, "./assets/colect64.xpm", x, y);
+			put_sprite(win, "./assets/colect64.xpm", x, y);
 		else if (win->map[j][i] == 'E')
 			put_sprite(win, "./assets/exit64.xpm", x, y);
 		x += 64;
@@ -150,13 +149,13 @@ char	*step_left(t_window *win)
 	new_row = ft_calloc(sizeof(char) * (win->line_length + 2), 1); // +2 para o \n
 	while (win->map[win->p_y][i] != '\n')
 	{
-		if (win->map[win->p_y][i + 1] == 'E' && win->colect == 0)
+		if (win->map[win->p_y][i + 1] == 'E' && win->c_count == 0)
 			exit(0);
 		else if (win->map[win->p_y][i] == 'P' && win->map[win->p_y][i + 1] != '1'
-				&& (win->map[win->p_y][i + 1] != 'E' && win->colect > 0))
+				&& (win->map[win->p_y][i + 1] != 'E' && win->c_count > 0))
 		{
 			if (win->map[win->p_y][i + 1] == 'C')
-				win->colect--;
+				win->c_count--;
 			new_row[i] = '0';
 			new_row[++i] = 'P';
 		}
@@ -181,13 +180,13 @@ char	*step_right(t_window *win)
 	new_row = ft_calloc(sizeof(char) * (win->line_length + 2), 1); // +2 para o \n
 	while (win->map[win->p_y][i] != '\n')
 	{
-		if (win->map[win->p_y][i - 1] == 'E' && win->colect == 0)
+		if (win->map[win->p_y][i - 1] == 'E' && win->c_count == 0)
 			exit(0);
 		else if (win->map[win->p_y][i] == 'P' && win->map[win->p_y][i - 1] != '1'
 				&& win->map[win->p_y][i - 1] != 'E')
 		{
 			if (win->map[win->p_y][i - 1] == 'C')
-				win->colect--;
+				win->c_count--;
 			new_row[i] = '0';
 			new_row[i - 1] = 'P';
 		}
