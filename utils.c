@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:09:41 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/27 17:25:12 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/28 11:21:42 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	put_sprite(t_window *win, char *path, int x, int y)
 
 	img = mlx_xpm_file_to_image(win->mlx, path, &img_width, &img_height);
 	mlx_put_image_to_window(win->mlx, win->win, img, x, y);
+	mlx_destroy_image(win->mlx, img);
 }
 
 void	set_values(int *i, int *j, int *x, int *y)
@@ -111,5 +112,6 @@ void	create_win(t_window *win)
 		x++;
 	while (win->map[y] != NULL)
 		y++;
+	win->line_length = x;
 	win->win = mlx_new_window(win->mlx, (x * 64), (y * 64), "so_long");
 }

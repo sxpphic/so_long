@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 10:03:01 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/27 17:24:18 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/28 11:22:05 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ typedef struct s_window {
 	char	**map;
 	void	*mlx;
 	void	*win;
+	int		p_x;
+	int		p_y;
+	int		line_length;
 }				t_window;
 
 /* validation functions */
