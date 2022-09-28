@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:09:41 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/28 11:21:42 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/28 11:53:23 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,3 +115,80 @@ void	create_win(t_window *win)
 	win->line_length = x;
 	win->win = mlx_new_window(win->mlx, (x * 64), (y * 64), "so_long");
 }
+
+void	player_possition(t_window *win)
+{
+	int	i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (win->map[j] != NULL)
+	{
+		if (win->map[j][i] == 'P')
+		{
+			win->p_x = i;
+			win->p_y = j;
+		}
+		i++;
+		if (win->map[j][i] == '\n')
+		{
+			j++;
+			i = 0;
+		}
+	}
+}
+
+char	*step_left(t_window *win)
+{
+	char	*new_row;
+	int	i;
+
+	i = 0;
+	ft_printf("d");
+	new_row = ft_calloc(sizeof(char) * (win->line_length + 2), 1); // +2 para o \n
+	while (win->map[win->p_y][i] != '\n')
+	{
+		if (win->map[win->p_y][i] == 'P' && win->map[win->p_y][i + 1] != '1')
+		{
+			new_row[i] = '0';
+			new_row[++i] = 'P';
+		}
+		else
+			new_row[i] = win->map[win->p_y][i];
+		i++;
+	}
+	new_row[i] = '\n';
+	i++;
+	new_row[i] = '\0';
+	free(win->map[win->p_y]);
+	return (new_row);
+}
+
+char	*step_right(t_window *win)
+{
+	char	*new_row;
+	int	i;
+
+	i = 0;
+	ft_printf("a");
+	new_row = ft_calloc(sizeof(char) * (win->line_length + 2), 1); // +2 para o \n
+	while (win->map[win->p_y][i] != '\n')
+	{
+		if (win->map[win->p_y][i] == 'P' && win->map[win->p_y][i - 1] != '1')
+		{
+			new_row[i] = '0';
+			new_row[i - 1] = 'P';
+		}
+		else
+			new_row[i] = win->map[win->p_y][i];
+		i++;
+	}
+	new_row[i] = '\n';
+	i++;
+	new_row[i] = '\0';
+	free(win->map[win->p_y]);
+	return (new_row);
+}
+
+
