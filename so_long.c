@@ -6,13 +6,47 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:14:39 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/28 11:53:46 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/28 12:11:10 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+char	*remove_player(t_window *win)
+{
+	char	*new_row;
+	int	i;
 
+	i = 0;
+	new_row = ft_calloc(sizeof(char) * (win->line_length + 2), 1); // +2 para o \n
+	while (win->map[win->p_y][i] != '\n')
+	{
+		if (win->map[win->p_y][i] == 'P')
+			new_row[i] = '0';
+		else
+			new_row[i] = win->map[win->p_y][i];
+		i++;
+	}
+	new_row[i] = '\n';
+	i++;
+	new_row[i] = '\0';
+	free(win->map[win->p_y]);
+	return (new_row);
+}
+
+
+char	*step_up(t_window *win)
+{
+	char	*new_row;
+	int	i;
+
+	i = 0;
+	ft_printf("w");
+	new_row = ft_calloc(sizeof(char) * (win->line_length + 2), 1); 
+
+
+	return (remove_player(win));
+}
 
 
 int	key_hook(int keycode, t_window *win)
@@ -20,7 +54,7 @@ int	key_hook(int keycode, t_window *win)
 	(void)win;
 	player_possition(win);
 	if (keycode == 13)
-		ft_printf("w", keycode);
+			win->map[win->p_y] = step_up(win);
 	else if (keycode == 0)
 		win->map[win->p_y] = step_right(win);
 	else if (keycode == 1)
