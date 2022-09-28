@@ -6,16 +6,17 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:14:39 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/28 17:55:36 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/28 18:50:22 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	valid_map(t_window *win)
+
+void info_count(t_window *win)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -36,25 +37,18 @@ void	valid_map(t_window *win)
 	}
 }
 
-void	ft_win(void)
+void	map_error(void)
 {
-	ft_printf("\033[22;95mYou Win!\033[0m");
+	ft_printf("\033[22;31mMap error!\n\033[0m");
 	exit(0);
 }
 
-void	move_player(t_window *win, int x, int y)
+int	valid_map(t_window *win)
 {
-	if (win->map[win->p_y + y][win->p_x + x] == '1')
-		return ;
-	if (win->map[win->p_y + y][win->p_x + x] == 'E' && win->c_count == 0)
-		ft_win();
-	else if (win->map[win->p_y + y][win->p_x + x] == 'E' && win->c_count > 0)
-		return ;
-	if (win->map[win->p_y + y][win->p_x + x] == 'C')
-		win->c_count--;
-	ft_printf("c_count :%i\n", win->c_count);
-	win->map[win->p_y][win->p_x] = '0';
-	win->map[win->p_y + y][win->p_x + x] = 'P';
+	info_count(win);
+	if (win->p_count != 1 || win->c_count == 0 || win->e_count != 1)
+		map_error();
+	return (0);
 }
 
 int	key_hook(int keycode, t_window *win)
@@ -67,17 +61,16 @@ int	key_hook(int keycode, t_window *win)
 	else if (keycode == 0)
 		move_player(win, -1, 0);
 	else if (keycode == 1)
-		move_player(win, 0, + 1);
+		move_player(win, 0, +1);
 	else if (keycode == 2)
 		move_player(win, +1, 0);
-	else if (keycode == 53)
+	else if (keycode == 53 || keycode == 17)
 		exit(0);
 	count++;
 	ft_printf(" %i\n", count);
 	print_map(win);
 	return (0);
 }
-
 
 int	main(int argc, char *argv[])
 {
@@ -90,9 +83,8 @@ int	main(int argc, char *argv[])
 	win.mlx = mlx_init();
 	create_win(&win);
 	print_map(&win);
-
+	mlx_hook(win.win, 17, 0, close_x, &win);
 	mlx_key_hook(win.win, key_hook, &win);
 	mlx_loop(win.mlx);
-
 	return (0);
 }

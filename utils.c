@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:09:41 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/28 17:41:41 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/28 18:50:53 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	**map_create(char	*map_path)
 	{
 		map[i] = get_next_line(fd);
 		if (!map[i])
-			break;
+			break ;
 		i++;
 	}
 	close(fd);
@@ -119,7 +119,7 @@ void	create_win(t_window *win)
 void	player_possition(t_window *win)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -139,136 +139,28 @@ void	player_possition(t_window *win)
 	}
 }
 
-char	*step_left(t_window *win)
+void	ft_win(void)
 {
-	char	*new_row;
-	int	i;
-
-	i = 0;
-	ft_printf("d");
-	new_row = ft_calloc(sizeof(char) * (win->line_length + 2), 1); // +2 para o \n
-	while (win->map[win->p_y][i] != '\n')
-	{
-		if (win->map[win->p_y][i + 1] == 'E' && win->c_count == 0)
-			exit(0);
-		else if (win->map[win->p_y][i] == 'P' && win->map[win->p_y][i + 1] != '1'
-				&& (win->map[win->p_y][i + 1] != 'E' && win->c_count > 0))
-		{
-			if (win->map[win->p_y][i + 1] == 'C')
-				win->c_count--;
-			new_row[i] = '0';
-			new_row[++i] = 'P';
-		}
-		else
-			new_row[i] = win->map[win->p_y][i];
-		i++;
-	}
-	new_row[i] = '\n';
-	i++;
-	new_row[i] = '\0';
-	free(win->map[win->p_y]);
-	return (new_row);
+	ft_printf("\033[22;95mYou Win!\n\033[0m");
+	exit(0);
 }
 
-char	*step_right(t_window *win)
+void	move_player(t_window *win, int x, int y)
 {
-	char	*new_row;
-	int	i;
-
-	i = 0;
-	ft_printf("a");
-	new_row = ft_calloc(sizeof(char) * (win->line_length + 2), 1); // +2 para o \n
-	while (win->map[win->p_y][i] != '\n')
-	{
-		if (win->map[win->p_y][i - 1] == 'E' && win->c_count == 0)
-			exit(0);
-		else if (win->map[win->p_y][i] == 'P' && win->map[win->p_y][i - 1] != '1'
-				&& win->map[win->p_y][i - 1] != 'E')
-		{
-			if (win->map[win->p_y][i - 1] == 'C')
-				win->c_count--;
-			new_row[i] = '0';
-			new_row[i - 1] = 'P';
-		}
-		else
-			new_row[i] = win->map[win->p_y][i];
-		i++;
-	}
-	new_row[i] = '\n';
-	i++;
-	new_row[i] = '\0';
-	free(win->map[win->p_y]);
-	return (new_row);
+	if (win->map[win->p_y + y][win->p_x + x] == '1')
+		return ;
+	if (win->map[win->p_y + y][win->p_x + x] == 'E' && win->c_count == 0)
+		ft_win();
+	else if (win->map[win->p_y + y][win->p_x + x] == 'E' && win->c_count > 0)
+		return ;
+	if (win->map[win->p_y + y][win->p_x + x] == 'C')
+		win->c_count--;
+	ft_printf("c_count :%i\n", win->c_count);
+	win->map[win->p_y][win->p_x] = '0';
+	win->map[win->p_y + y][win->p_x + x] = 'P';
 }
 
-char	*remove_player(t_window *win)
+int	close_x(void)
 {
-	char	*new_row;
-	int	i;
-
-	i = 0;
-	new_row = ft_calloc(sizeof(char) * (win->line_length + 2), 1); // +2 para o \n
-	while (win->map[win->p_y][i] != '\n')
-	{
-		if (win->map[win->p_y][i] == 'P')
-			new_row[i] = '0';
-		else
-			new_row[i] = win->map[win->p_y][i];
-		i++;
-	}
-	new_row[i] = '\n';
-	i++;
-	new_row[i] = '\0';
-	free(win->map[win->p_y]);
-	return (new_row);
-}
-
-char	*step_up(t_window *win)
-{
-	char	*new_row;
-	int	i;
-
-	i = 0;
-	ft_printf("w");
-	if (win->map[win->p_y - 1][win->p_x] == '1')
-		return (win->map[win->p_y]);
-	new_row = ft_calloc(sizeof(char) * (win->line_length + 2), 1); 
-	while (win->map[win->p_y - 1][i] != '\n')
-	{
-		if (i == win->p_x)
-			new_row[i] = 'P';
-		else
-			new_row[i] = win->map[win->p_y - 1][i];
-		i++;
-	}
-	new_row[i] = '\n';
-	i++;
-	new_row[i] = '\0';
-	win->map[win->p_y - 1] = new_row;
-	return (remove_player(win));
-}
-
-char	*step_down(t_window *win)
-{
-	char	*new_row;
-	int	i;
-
-	i = 0;
-	ft_printf("s");
-	if (win->map[win->p_y + 1][win->p_x] == '1')
-		return (win->map[win->p_y]);
-	new_row = ft_calloc(sizeof(char) * (win->line_length + 2), 1); 
-	while (win->map[win->p_y + 1][i] != '\n')
-	{
-		if (i == win->p_x)
-			new_row[i] = 'P';
-		else
-			new_row[i] = win->map[win->p_y + 1][i];
-		i++;
-	}
-	new_row[i] = '\n';
-	i++;
-	new_row[i] = '\0';
-	win->map[win->p_y + 1] = new_row;
-	return (remove_player(win));
+	exit(0);
 }
