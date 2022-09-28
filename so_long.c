@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:14:39 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/28 12:11:10 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/28 13:42:38 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,22 @@ char	*step_up(t_window *win)
 
 	i = 0;
 	ft_printf("w");
+	if (win->map[win->p_y - 1][win->p_x] == '1')
+		return (win->map[win->p_y]);
 	new_row = ft_calloc(sizeof(char) * (win->line_length + 2), 1); 
-
-
+	while (win->map[win->p_y - 1][i] != '\n')
+	{
+		if (i == win->p_x)
+			new_row[i] = 'P';
+		else
+			new_row[i] = win->map[win->p_y - 1][i];
+		i++;
+	}
+	new_row[i] = '\n';
+	i++;
+	new_row[i] = '\0';
+	//free(win->map[win->p_y - 1]);
+	win->map[win->p_y - 1] = new_row;
 	return (remove_player(win));
 }
 
