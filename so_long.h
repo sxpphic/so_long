@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 10:03:01 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/28 14:51:43 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/28 16:24:23 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,14 @@ void	initialize_line_row(int *i, int *j, int *x, int *y);
 void	set_values(int *i, int *j, int *x, int *y);
 void	print_map(t_window *win);
 void	create_win(t_window *win);
+
+ /* move player */
+char	*remove_player(t_window *win);
+char	*step_up(t_window *win);
+char	*step_down(t_window *win);
 char	*step_left(t_window *win);
 char	*step_right(t_window *win);
 void	player_possition(t_window *win);
+int	key_hook(int keycode, t_window *win);
 
 
