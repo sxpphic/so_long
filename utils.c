@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:09:41 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/29 11:03:14 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/29 11:27:38 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	**map_create(char	*map_path)
 
 	i = 0;
 	fd = open(map_path, O_RDWR);
-	if (fd < 0)
+	if (fd == -1)
 		map_error(); //tratar esse error;
 	line1 = get_next_line(fd);
 	map = ft_calloc(sizeof(char *), ft_strlen(line1) + 1);
@@ -115,7 +115,6 @@ void	create_win(t_window *win)
 		x++;
 	while (win->map[y] != NULL)
 		y++;
-	win->line_length = x;
 	win->win = mlx_new_window(win->mlx, (x * 64), (y * 64), "so_long");
 }
 
@@ -161,6 +160,8 @@ void	move_player(t_window *win, int x, int y)
 	ft_printf("c_count :%i\n", win->c_count);
 	win->map[win->p_y][win->p_x] = '0';
 	win->map[win->p_y + y][win->p_x + x] = 'P';
+	win->moves++;
+	ft_printf("%i\n", win->moves);
 }
 
 int	close_x(void)

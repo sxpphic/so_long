@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:14:39 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/29 10:22:29 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/29 11:27:35 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,21 @@ void	border_valid(t_window *win)
 
 	i = 0;
 	j = 0;
+	win->line_length = ft_strlen(win->map[0]);
 	while (win->map[0][i] != '\n')
 	{
 		if (win->map[0][i] != '1' || win->map[0][i] != '1')
 			return ft_error(win);
 		i++;
 	}
-	ft_printf("x :%i\n", win->p_x);
+	ft_printf("x :%i\n", win->line_length);
 	while (win->map[j] != NULL)
 	{
-		if (win->map[j][0] != '1' || win->map[j][win->line_length -1 ] != '1')
+		if (win->map[j][0] != '1' || win->map[j][win->line_length - 2 ] != '1')
 			return ft_error(win);
 		j++;
 	}
+
 
 }
 
@@ -60,6 +62,8 @@ void info_count(t_window *win)
 			win->c_count++;
 		else if (win->map[j][i] == 'E')
 			win->e_count++;
+		else if (win->map[j][i] != '0' && (win->map[j][i] != '1') && (win->map[j][i] != '\n'))
+			win->error = 1;
 		if (win->map[j][i] == '\n')
 		{
 			j++;
@@ -92,8 +96,6 @@ int	valid_map(t_window *win)
 
 int	key_hook(int keycode, t_window *win)
 {
-	static int	count;
-
 	player_possition(win);
 	if (keycode == 13)
 		move_player(win, 0, -1);
@@ -105,8 +107,6 @@ int	key_hook(int keycode, t_window *win)
 		move_player(win, +1, 0);
 	else if (keycode == 53 || keycode == 17)
 		exit(0);
-	count++;
-	ft_printf(" %i\n", count);
 	print_map(win);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 10:03:01 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/29 11:03:45 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/29 11:26:33 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_window {
 	int		p_count;
 	int		e_count;
 	int		error;
+	int		moves;
 }				t_window;
 
 /* validation functions */
