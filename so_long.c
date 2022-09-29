@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:14:39 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/29 11:27:35 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/29 13:40:20 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,13 @@ void	border_valid(t_window *win)
 			return ft_error(win);
 		i++;
 	}
-	ft_printf("x :%i\n", win->line_length);
+//	ft_printf("x :%i\n", win->line_length);
 	while (win->map[j] != NULL)
 	{
 		if (win->map[j][0] != '1' || win->map[j][win->line_length - 2 ] != '1')
 			return ft_error(win);
 		j++;
 	}
-
-
 }
 
 void info_count(t_window *win)

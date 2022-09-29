@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:09:41 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/29 11:27:38 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/29 13:42:07 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	print_map(t_window *win)
 		x += 64;
 		i++;
 		if (win->map[j][i] == '\n')
+
 			set_values(&i, &j, &x, &y);
 	}
 }
@@ -157,7 +158,7 @@ void	move_player(t_window *win, int x, int y)
 		return ;
 	if (win->map[win->p_y + y][win->p_x + x] == 'C')
 		win->c_count--;
-	ft_printf("c_count :%i\n", win->c_count);
+//	ft_printf("c_count :%i\n", win->c_count);
 	win->map[win->p_y][win->p_x] = '0';
 	win->map[win->p_y + y][win->p_x + x] = 'P';
 	win->moves++;
