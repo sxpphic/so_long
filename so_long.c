@@ -6,20 +6,52 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:14:39 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/28 18:50:22 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/29 10:22:29 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+void	ft_error(t_window *win)
+{
+	win->error = 1;
+	return ;
+}
 
-void info_count(t_window *win)
+void	border_valid(t_window *win)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
+	while (win->map[0][i] != '\n')
+	{
+		if (win->map[0][i] != '1' || win->map[0][i] != '1')
+			return ft_error(win);
+		i++;
+	}
+	ft_printf("x :%i\n", win->p_x);
+	while (win->map[j] != NULL)
+	{
+		if (win->map[j][0] != '1' || win->map[j][win->line_length -1 ] != '1')
+			return ft_error(win);
+		j++;
+	}
+
+}
+
+void info_count(t_window *win)
+{
+	int	i;
+	int	j;
+	int	line_len;
+	int	next_len;
+
+	i = 0;
+	j = 0;
+	line_len = ft_strlen(win->map[j]);
+	next_len = ft_strlen(win->map[j]);
 	while (win->map[j] != NULL)
 	{
 		if (win->map[j][i] == 'P')
@@ -31,10 +63,16 @@ void info_count(t_window *win)
 		if (win->map[j][i] == '\n')
 		{
 			j++;
+			if (win->map[j] != NULL)
+				next_len = ft_strlen(win->map[j]);
+			if (line_len != next_len)
+				win->error = 1;
 			i = 0;
 		}
 		i++;
 	}
+	if (j == line_len -1)
+		win->error = 1;
 }
 
 void	map_error(void)
@@ -46,7 +84,8 @@ void	map_error(void)
 int	valid_map(t_window *win)
 {
 	info_count(win);
-	if (win->p_count != 1 || win->c_count == 0 || win->e_count != 1)
+	border_valid(win);
+	if (win->p_count != 1 || win->c_count == 0 || win->e_count != 1 || win->error == 1)
 		map_error();
 	return (0);
 }
