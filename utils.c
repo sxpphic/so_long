@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:09:41 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/29 13:42:07 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/29 14:31:02 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,9 @@ void	print_map(t_window *win)
 			put_sprite(win, "./assets/player64.xpm", x, y);
 		else if (win->map[j][i] == 'C')
 			put_sprite(win, "./assets/colect64.xpm", x, y);
-		else if (win->map[j][i] == 'E')
+		else if (win->map[j][i] == 'E' && win->c_count > 0)
+			put_sprite(win, "./assets/broken_portal.xpm", x, y);
+		else if (win->map[j][i] == 'E' && win->c_count == 0)
 			put_sprite(win, "./assets/exit64.xpm", x, y);
 		x += 64;
 		i++;
