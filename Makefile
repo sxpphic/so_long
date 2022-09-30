@@ -8,7 +8,7 @@ OBJ			= $(SRC:.c=.o)
 %.o: %.c
 	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 INCLUDE_M = -Lmlx -lmlx -framework OpenGL -framework AppKit
 

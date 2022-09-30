@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:14:39 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/29 13:40:20 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/09/29 22:56:33 by sphh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,18 +95,33 @@ int	valid_map(t_window *win)
 int	key_hook(int keycode, t_window *win)
 {
 	player_possition(win);
-	if (keycode == 13)
+	//if (keycode == 13)
+	if (keycode == 119)
 		move_player(win, 0, -1);
-	else if (keycode == 0)
+	//else if (keycode == 0)
+	else if (keycode == 97)
 		move_player(win, -1, 0);
-	else if (keycode == 1)
+	//else if (keycode == 1)
+	else if (keycode == 115)
 		move_player(win, 0, +1);
-	else if (keycode == 2)
+	//else if (keycode == 2)
+	else if (keycode == 100)
 		move_player(win, +1, 0);
-	else if (keycode == 53 || keycode == 17)
+	//else if (keycode == 53)
+	else if (keycode == 65307)
 		exit(0);
 	print_map(win);
 	return (0);
+}
+
+void	ft_zero(t_window *win)
+{
+	win->p_count = 0;
+	win->c_count = 0;
+	win->e_count = 0;
+	win->p_count = 0;
+	win->error = 0;
+	win->moves = 0;
 }
 
 int	main(int argc, char *argv[])
@@ -116,6 +131,7 @@ int	main(int argc, char *argv[])
 	if (argc != 2 || map_name(argv[1]))
 		return (write(2, "error\n", 6));
 	win.map = map_create(argv[1]);
+	ft_zero(&win);
 	valid_map(&win);
 	win.mlx = mlx_init();
 	create_win(&win);
