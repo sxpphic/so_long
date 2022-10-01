@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:09:41 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/01 15:13:25 by sphh             ###   ########.fr       */
+/*   Updated: 2022/10/01 20:22:04 by sphh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ void	print_map(t_window *win)
 		x += 64;
 		i++;
 		if (win->map[j][i] == '\n')
-
 			set_values(&i, &j, &x, &y);
 	}
 }
@@ -169,4 +168,86 @@ void	move_player(t_window *win, int x, int y)
 int	close_x(void)
 {
 	exit(0);
+}
+
+void	ft_error(t_window *win)
+{
+	win->error = 1;
+	return ;
+}
+
+void	border_valid(t_window *win)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	win->line_length = ft_strlen(win->map[0]);
+	while (win->map[0][i] != '\n')
+	{
+		if (win->map[0][i] != '1' || win->map[0][i] != '1')
+			return ft_error(win);
+		i++;
+	}
+	while (win->map[j] != NULL)
+	{
+		if (win->map[j][0] != '1' || win->map[j][win->line_length - 2 ] != '1')
+			return (ft_error(win));
+		j++;
+	}
+}
+
+void info_count(t_window *win)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (win->map[j] != NULL)
+	{
+		if (win->map[j][i] == 'P')
+			win->p_count++;
+		else if (win->map[j][i] == 'C')
+			win->c_count++;
+		else if (win->map[j][i] == 'E')
+			win->e_count++;
+		else if (win->map[j][i] != '0' && (win->map[j][i] != '1') && (win->map[j][i] != '\n'))
+			win->error = 1;
+		if (win->map[j][i] == '\n')
+		{
+			j++;
+			i = 0;
+		}
+		i++;
+	}
+}
+
+void	map_size_verify(t_window *win)
+{
+	int	i;
+	int	j;
+	int	line_len;
+	int	next_len;
+
+	i = 0;
+	j = 0;
+	line_len = ft_strlen(win->map[j]);
+	next_len = ft_strlen(win->map[j]);
+	while (win->map[j] != NULL)
+	{
+		if (win->map[j][i] == '\n')
+		{
+			j++;
+			if (win->map[j] != NULL)
+				next_len = ft_strlen(win->map[j]);
+			if (line_len != next_len)
+				win->error = 1;
+			i = 0;
+		}
+		i++;
+	}
+	if (j == line_len -1)
+		win->error = 1;
 }

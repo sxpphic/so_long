@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 10:03:01 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/29 11:26:33 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/01 20:22:22 by sphh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,11 @@ void	ft_win(void);
 
 int		close_x(void);
 void	map_error(void);
+
+/* map verify */
+
+void	border_valid(t_window *win);
+void	info_count(t_window *win);
+void	map_size_verify(t_window *win);
 
 #endif
