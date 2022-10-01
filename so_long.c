@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:14:39 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/29 22:56:33 by sphh             ###   ########.fr       */
+/*   Updated: 2022/10/01 15:24:07 by sphh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	border_valid(t_window *win)
 			return ft_error(win);
 		i++;
 	}
-//	ft_printf("x :%i\n", win->line_length);
 	while (win->map[j] != NULL)
 	{
 		if (win->map[j][0] != '1' || win->map[j][win->line_length - 2 ] != '1')
@@ -45,13 +44,9 @@ void info_count(t_window *win)
 {
 	int	i;
 	int	j;
-	int	line_len;
-	int	next_len;
 
 	i = 0;
 	j = 0;
-	line_len = ft_strlen(win->map[j]);
-	next_len = ft_strlen(win->map[j]);
 	while (win->map[j] != NULL)
 	{
 		if (win->map[j][i] == 'P')
@@ -62,6 +57,28 @@ void info_count(t_window *win)
 			win->e_count++;
 		else if (win->map[j][i] != '0' && (win->map[j][i] != '1') && (win->map[j][i] != '\n'))
 			win->error = 1;
+		if (win->map[j][i] == '\n')
+		{
+			j++;
+			i = 0;
+		}
+		i++;
+	}
+}
+
+void	map_size_verify(t_window *win)
+{
+	int	i;
+	int	j;
+	int	line_len;
+	int	next_len;
+
+	i = 0;
+	j = 0;
+	line_len = ft_strlen(win->map[j]);
+	next_len = ft_strlen(win->map[j]);
+	while (win->map[j] != NULL)
+	{
 		if (win->map[j][i] == '\n')
 		{
 			j++;
@@ -79,7 +96,8 @@ void info_count(t_window *win)
 
 void	map_error(void)
 {
-	ft_printf("\033[22;31mMap error!\n\033[0m");
+	ft_putstr_fd("\033[22;31mError\n\033[0m", 2);
+	ft_putstr_fd("\033[22;31mMap error\n\033[0m", 2);
 	exit(0);
 }
 
@@ -87,6 +105,7 @@ int	valid_map(t_window *win)
 {
 	info_count(win);
 	border_valid(win);
+	map_size_verify(win);
 	if (win->p_count != 1 || win->c_count == 0 || win->e_count != 1 || win->error == 1)
 		map_error();
 	return (0);
