@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:14:39 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/01 15:35:16 by sphh             ###   ########.fr       */
+/*   Updated: 2022/10/03 09:37:09 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,15 @@ int	valid_map(t_window *win)
 int	key_hook(int keycode, t_window *win)
 {
 	player_possition(win);
-	//if (keycode == 13)
-	if (keycode == 119)
-		move_player(win, 0, -1);
-	//else if (keycode == 0)
-	else if (keycode == 97)
-		move_player(win, -1, 0);
-	//else if (keycode == 1)
-	else if (keycode == 115)
-		move_player(win, 0, +1);
-	//else if (keycode == 2)
-	else if (keycode == 100)
-		move_player(win, +1, 0);
-	//else if (keycode == 53)
-	else if (keycode == 65307)
+	if (keycode == 13)
+	  move_player(win, 0, -1);
+	else if (keycode == 0)
+	  move_player(win, -1, 0);
+	else if (keycode == 1)
+	  move_player(win, 0, +1);
+	else if (keycode == 2)
+	  move_player(win, +1, 0);
+	else if (keycode == 53)
 		exit(0);
 	print_map(win);
 	return (0);

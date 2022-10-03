@@ -6,11 +6,34 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:09:41 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/01 20:22:04 by sphh             ###   ########.fr       */
+/*   Updated: 2022/10/03 09:36:26 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+/*
+int	key_hook(int keycode, t_window *win)
+{
+	player_possition(win);
+	//if (keycode == 13)
+	if (keycode == 119)
+		move_player(win, 0, -1);
+	//else if (keycode == 0)
+	else if (keycode == 97)
+		move_player(win, -1, 0);
+	//else if (keycode == 1)
+	else if (keycode == 115)
+		move_player(win, 0, +1);
+	//else if (keycode == 2)
+	else if (keycode == 100)
+		move_player(win, +1, 0);
+	//else if (keycode == 53)
+	else if (keycode == 65307)
+		exit(0);
+	print_map(win);
+	return (0);
+}*/
 
 int	map_name(char	*map)
 {
