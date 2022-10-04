@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 10:03:01 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/04 12:19:02 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/04 15:35:32 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,19 @@ void	border_valid(t_window *win);
 void	info_count(t_window *win);
 void	map_size_verify(t_window *win);
 void	exit_possition(t_window *win);
+
+
+void	map_error(void);
+void	print_array(char	**map);
+size_t	columns_count(char **map);
+char	**map_copy(char **map);
+void	iterate_map(char **map, int	i, int	j);
+int	check_exit(t_window *win, char **map);
+int	collect_count(char **map);
+void	ft_free_matrix(char **matrix);
+int	is_playable(t_window *win);
+int	valid_map(t_window *win);
+int	key_hook(int keycode, t_window *win);
+void	ft_zero(t_window *win);
 
 #endif
