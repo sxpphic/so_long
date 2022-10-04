@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:09:41 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/04 15:47:12 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:51:53 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,124 +48,6 @@ int	map_name(char	*map)
 	return (ft_strncmp(map, ".ber", len));
 }
 
-char	**map_create(char	*map_path)
-{
-	char	**map;
-	char	*line1;
-	int		fd;
-	int		i;
-
-	i = 0;
-	fd = open(map_path, O_RDWR);
-	if (fd == -1)
-		map_error(); //tratar esse error;
-	line1 = get_next_line(fd);
-	map = ft_calloc(sizeof(char *), ft_strlen(line1) * 10); // estou mallocando o tamanho errado
-	map[i++] = line1;
-	while (1)
-	{
-		map[i] = get_next_line(fd);
-		if (!map[i])
-			break ;
-		i++;
-	}
-	close(fd);
-	return (map);
-}
-
-void	put_sprite(t_window *win, char *path, int x, int y)
-{
-	void	*img;
-	int		img_width;
-	int		img_height;
-
-	img = mlx_xpm_file_to_image(win->mlx, path, &img_width, &img_height);
-	mlx_put_image_to_window(win->mlx, win->win, img, x, y);
-	mlx_destroy_image(win->mlx, img);
-}
-
-void	set_values(int *i, int *j, int *x, int *y)
-{
-	(*i) = 0;
-	(*j)++;
-	(*y) += 64;
-	(*x) = 0;
-}
-
-void	initialize_line_row(int *i, int *j, int *x, int *y)
-{
-	(*i) = 0;
-	(*j) = 0;
-	(*y) = 0;
-	(*x) = 0;
-}
-
-void	print_map(t_window *win)
-{
-	int	i;
-	int	j;
-	int	x;
-	int	y;
-
-	initialize_line_row(&i, &j, &x, &y);
-	while (win->map[j] != NULL)
-	{
-		if (win->map[j][i] == '1')
-			put_sprite(win, "./assets/wall64.xpm", x, y);
-		else if (win->map[j][i] == '0')
-			put_sprite(win, "./assets/ground64.xpm", x, y);
-		else if (win->map[j][i] == 'P')
-			put_sprite(win, "./assets/player64.xpm", x, y);
-		else if (win->map[j][i] == 'C')
-			put_sprite(win, "./assets/colect64.xpm", x, y);
-		else if (win->map[j][i] == 'E' && win->c_count > 0)
-			put_sprite(win, "./assets/exit64.xpm", x, y);
-		else if (win->map[j][i] == 'E' && win->c_count == 0)
-			put_sprite(win, "./assets/exit64.xpm", x, y);
-		x += 64;
-		i++;
-		if (win->map[j][i] == '\n')
-			set_values(&i, &j, &x, &y);
-	}
-}
-
-void	create_win(t_window *win)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
-	while (win->map[0][x] != '\n')
-		x++;
-	while (win->map[y] != NULL)
-		y++;
-	win->win = mlx_new_window(win->mlx, (x * 64), (y * 64), "so_long");
-}
-
-void	player_possition(t_window *win)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (win->map[j] != NULL)
-	{
-		if (win->map[j][i] == 'P')
-		{
-			win->p_x = i;
-			win->p_y = j;
-		}
-		i++;
-		if (win->map[j][i] == '\n')
-		{
-			j++;
-			i = 0;
-		}
-	}
-}
-
 void	exit_possition(t_window *win)
 {
 	int	i;
@@ -195,22 +77,6 @@ void	ft_win(void)
 	exit(0);
 }
 
-void	move_player(t_window *win, int x, int y)
-{
-	if (win->map[win->p_y + y][win->p_x + x] == '1')
-		return ;
-	if (win->map[win->p_y + y][win->p_x + x] == 'E' && win->c_count == 0)
-		ft_win();
-	else if (win->map[win->p_y + y][win->p_x + x] == 'E' && win->c_count > 0)
-		return ;
-	if (win->map[win->p_y + y][win->p_x + x] == 'C')
-		win->c_count--;
-	win->map[win->p_y][win->p_x] = '0';
-	win->map[win->p_y + y][win->p_x + x] = 'P';
-	win->moves++;
-	ft_printf("%i\n", win->moves);
-}
-
 int	close_x(void)
 {
 	exit(0);
@@ -220,82 +86,6 @@ void	ft_error(t_window *win)
 {
 	win->error = 1;
 	return ;
-}
-
-void	border_valid(t_window *win)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	win->line_length = ft_strlen(win->map[0]);
-	while (win->map[0][i] != '\n')
-	{
-		if (win->map[0][i] != '1' || win->map[0][i] != '1')
-			return ft_error(win);
-		i++;
-	}
-	while (win->map[j] != NULL)
-	{
-		if (win->map[j][0] != '1' || win->map[j][win->line_length - 2 ] != '1')
-			return (ft_error(win));
-		j++;
-	}
-}
-
-void info_count(t_window *win)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (win->map[j] != NULL)
-	{
-		if (win->map[j][i] == 'P')
-			win->p_count++;
-		else if (win->map[j][i] == 'C')
-			win->c_count++;
-		else if (win->map[j][i] == 'E')
-			win->e_count++;
-		else if (win->map[j][i] != '0' && (win->map[j][i] != '1') && (win->map[j][i] != '\n'))
-			win->error = 1;
-		if (win->map[j][i] == '\n')
-		{
-			j++;
-			i = 0;
-		}
-		i++;
-	}
-}
-
-void	map_size_verify(t_window *win)
-{
-	int	i;
-	int	j;
-	int	line_len;
-	int	next_len;
-
-	i = 0;
-	j = 0;
-	line_len = ft_strlen(win->map[j]);
-	next_len = ft_strlen(win->map[j]);
-	while (win->map[j] != NULL)
-	{
-		if (win->map[j][i] == '\n')
-		{
-			j++;
-			if (win->map[j] != NULL)
-				next_len = ft_strlen(win->map[j]);
-			if (line_len != next_len)
-				win->error = 1;
-			i = 0;
-		}
-		i++;
-	}
-	if (j == line_len -1)
-		win->error = 1;
 }
 
 void	map_error(void)
@@ -328,56 +118,6 @@ size_t	columns_count(char **map)
 	return (j);
 }
 
-char	**map_copy(char **map)
-{
-	char	**copy;
-	int	j;
-
-	j = 0;
-	copy = ft_calloc(1, (sizeof(char *) * ft_strlen(map[j]) * columns_count(map)));
-	while (map[j] != NULL)
-	{
-		copy[j] = ft_strdup(map[j]);
-		j++;
-	}
-	return (copy);
-}
-
-void	iterate_map(char **map, int	i, int	j)
-{
-	if (map[j][i + 1] == '0' || map[j][i + 1] == 'C')
-	{
-		map[j][i + 1] = 'X';
-		iterate_map(map, i + 1, j);
-	}
-	if (map[j][i - 1] == '0' || map[j][i - 1] == 'C')
-	{
-		map[j][i - 1] = 'X';
-		iterate_map(map, i - 1, j);
-	}
-	if (map[j - 1][i] == '0' || map[j - 1][i] == 'C')
-	{
-		map[j - 1][i] = 'X';
-		iterate_map(map, i, j - 1);
-	}
-	if (map[j + 1][i] == '0' || map[j + 1][i] == 'C')
-	{
-		map[j + 1][i] = 'X';
-		iterate_map(map, i, j + 1);
-	}
-}
-
-int	check_exit(t_window *win, char **map)
-{
-	exit_possition(win);
-	if (map[win->e_y][win->e_x + 1] == 'X'
-			|| map[win->e_y][win->e_x - 1] == 'X'
-			|| map[win->e_y + 1][win->e_x] == 'X'
-			|| map[win->e_y - 1][win->e_x] == 'X')
-		return (0);
-	return (1);
-}
-
 int	collect_count(char **map)
 {
 	int	i;
@@ -399,6 +139,21 @@ int	collect_count(char **map)
 	return (0);
 }
 
+char	**map_copy(char **map)
+{
+	char	**copy;
+	int	j;
+
+	j = 0;
+	copy = ft_calloc(1, (sizeof(char *) * ft_strlen(map[j]) * columns_count(map)));
+	while (map[j] != NULL)
+	{
+		copy[j] = ft_strdup(map[j]);
+		j++;
+	}
+	return (copy);
+}
+
 void	ft_free_matrix(char **matrix)
 {
 	int	i;
@@ -407,50 +162,6 @@ void	ft_free_matrix(char **matrix)
 	while (matrix[i])
 		free(matrix[i++]);
 	free(matrix);
-}
-
-int	is_playable(t_window *win)
-{
-	char	**temp;
-
-	player_possition(win);
-	temp = map_copy(win->map);
-	iterate_map(temp, win->p_x, win->p_y);
-	print_array(temp);
-	if (check_exit(win, temp) == 1 || collect_count(temp) == 1)
-		return (1);
-	ft_free_matrix(temp);
-	return (0);
-}
-
-int	valid_map(t_window *win)
-{
-	info_count(win);
-	border_valid(win);
-	map_size_verify(win);
-	if (win->p_count != 1 || win->c_count == 0 || 
-				win->e_count != 1 || win->error == 1)
-		map_error();
-	if (is_playable(win) == 1)
-		map_error();
-	return (0);
-}
-
-int	key_hook(int keycode, t_window *win)
-{
-	player_possition(win);
-	if (keycode == 13)
-	  move_player(win, 0, -1);
-	else if (keycode == 0)
-	  move_player(win, -1, 0);
-	else if (keycode == 1)
-	  move_player(win, 0, +1);
-	else if (keycode == 2)
-	  move_player(win, +1, 0);
-	else if (keycode == 53)
-		exit(0);
-	print_map(win);
-	return (0);
 }
 
 void	ft_zero(t_window *win)

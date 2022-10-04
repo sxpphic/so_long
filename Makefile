@@ -1,7 +1,10 @@
 NAME = so_long
 
 SRC = so_long.c\
-	  utils.c
+	  utils.c\
+	  map_validation.c\
+	  win_map_manage.c\
+	  player_movement.c
 
 OBJ			= $(SRC:.c=.o)
 
