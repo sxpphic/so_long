@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 10:03:01 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/01 20:22:22 by sphh             ###   ########.fr       */
+/*   Updated: 2022/10/04 12:19:02 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ typedef struct s_window {
 	void	*win;
 	int		p_x;
 	int		p_y;
+	int		e_x;
+	int		e_y;
 	int		line_length;
 	int		c_count;
 	int		p_count;
@@ -63,5 +65,6 @@ void	map_error(void);
 void	border_valid(t_window *win);
 void	info_count(t_window *win);
 void	map_size_verify(t_window *win);
+void	exit_possition(t_window *win);
 
 #endif

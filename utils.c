@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:09:41 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/04 09:19:44 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/04 12:18:24 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,29 @@ void	player_possition(t_window *win)
 		{
 			win->p_x = i;
 			win->p_y = j;
+		}
+		i++;
+		if (win->map[j][i] == '\n')
+		{
+			j++;
+			i = 0;
+		}
+	}
+}
+
+void	exit_possition(t_window *win)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (win->map[j] != NULL)
+	{
+		if (win->map[j][i] == 'E')
+		{
+			win->e_x = i;
+			win->e_y = j;
 		}
 		i++;
 		if (win->map[j][i] == '\n')
