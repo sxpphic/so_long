@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:09:41 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/04 16:51:53 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/04 17:07:21 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,67 +34,7 @@ int	key_hook(int keycode, t_window *win)
 	print_map(win);
 	return (0);
 }*/
-
-int	map_name(char	*map)
-{
-	int	len;
-
-	len = ft_strlen(map);
-	while(len > 4)
-	{
-		map++;
-		len--;
-	}
-	return (ft_strncmp(map, ".ber", len));
-}
-
-void	exit_possition(t_window *win)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (win->map[j] != NULL)
-	{
-		if (win->map[j][i] == 'E')
-		{
-			win->e_x = i;
-			win->e_y = j;
-		}
-		i++;
-		if (win->map[j][i] == '\n')
-		{
-			j++;
-			i = 0;
-		}
-	}
-}
-
-void	ft_win(void)
-{
-	ft_printf("\033[22;95mYou Win!\n\033[0m");
-	exit(0);
-}
-
-int	close_x(void)
-{
-	exit(0);
-}
-
-void	ft_error(t_window *win)
-{
-	win->error = 1;
-	return ;
-}
-
-void	map_error(void)
-{
-	ft_putstr_fd("\033[22;31mError\n\033[0m", 2);
-	ft_putstr_fd("\033[22;31mMap error\n\033[0m", 2);
-	exit(0);
-}
-
+/*
 void	print_array(char	**map)
 {
 	int	j;
@@ -106,7 +46,7 @@ void	print_array(char	**map)
 		j++;
 	}
 	ft_printf("\n");
-}
+}*/
 
 size_t	columns_count(char **map)
 {

@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:39:22 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/04 16:50:18 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/04 17:08:02 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	is_playable(t_window *win)
 	player_possition(win);
 	temp = map_copy(win->map);
 	iterate_map(temp, win->p_x, win->p_y);
-	print_array(temp);
+//	print_array(temp);
 	if (check_exit(win, temp) == 1 || collect_count(temp) == 1)
 		return (1);
 	ft_free_matrix(temp);
@@ -149,3 +149,41 @@ void	map_size_verify(t_window *win)
 	if (j == line_len -1)
 		win->error = 1;
 }
+
+int	map_name(char	*map)
+{
+	int	len;
+
+	len = ft_strlen(map);
+	while(len > 4)
+	{
+		map++;
+		len--;
+	}
+	return (ft_strncmp(map, ".ber", len));
+}
+
+void	exit_possition(t_window *win)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (win->map[j] != NULL)
+	{
+		if (win->map[j][i] == 'E')
+		{
+			win->e_x = i;
+			win->e_y = j;
+		}
+		i++;
+		if (win->map[j][i] == '\n')
+		{
+			j++;
+			i = 0;
+		}
+	}
+}
+
+
