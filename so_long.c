@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:14:39 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/04 14:26:30 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/04 15:12:37 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,16 @@ int	collect_count(char **map)
 	return (0);
 }
 
+void	ft_free_matrix(char **matrix)
+{
+	int	i;
+
+	i = 0;
+	while (matrix[i])
+		free(matrix[i++]);
+	free(matrix);
+}
+
 int	is_playable(t_window *win)
 {
 	char	**temp;
@@ -123,6 +133,7 @@ int	is_playable(t_window *win)
 	print_array(temp);
 	if (check_exit(win, temp) == 1 || collect_count(temp) == 1)
 		return (1);
+	ft_free_matrix(temp);
 	return (0);
 }
 
