@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:14:39 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/04 11:11:56 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/04 12:05:37 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,45 +59,37 @@ char	**map_copy(char **map)
 
 void	iterate_map(char **map, int	i, int	j)
 {
-	while (map[j][i] != '1')
+//	map[j][i] = 'X';
+	if (map[j][i + 1] == '0')
 	{
-		map[j][i] = 'X';
-		i++;
-		if (map[j][i] == '1')
-		{
-			j++;
-			i = 1;
-		}
+		map[j][i + 1] = 'X';
+		iterate_map(map, i + 1, j);
 	}
-	j = 1;
-	i = 1;
-	while (map[j][i] != '\n')
+	if (map[j][i - 1] == '0')
 	{
-		if (map[j][i] == 'X')
-			i++;
-		if (map[j][i] == '0' && (map[j - 1][i] == 'X'
-					|| map[j + 1][i] == 'X'
-					|| map[j][i - 1] == 'X'
-					|| map[j][i + 1] == 'X'))
-			map[j][i] = 'X';
-		i++;
-		if (map[j][i] == '\n')
-		{
-			j++;
-			i = 1;
-			if (map[j] == NULL)
-				break ;
-		}
+		map[j][i - 1] = 'X';
+		iterate_map(map, i - 1, j);
 	}
-
+	if (map[j - 1][i] == '0')
+	{
+		map[j - 1][i] = 'X';
+		iterate_map(map, i, j - 1);
+	}
+	if (map[j + 1][i] == '0')
+	{
+		map[j + 1][i] = 'X';
+		iterate_map(map, i, j + 1);
+	}
 }
 
 void	is_playable(t_window *win)
 {
 	char	**temp;
 
+	player_possition(win);
 	temp = map_copy(win->map);
-	iterate_map(temp, 1, 1);
+	ft_printf("%i\n", win->p_x);
+	iterate_map(temp, win->p_x, win->p_y);
 	print_array(temp);
 }
 
