@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:39:22 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/05 11:23:49 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/05 11:32:30 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	valid_map(t_window *win)
 	map_size_verify(win);
 	if (win->p_count != 1 || win->c_count == 0 || 
 				win->e_count != 1 || win->error == 1)
-		map_error("map errorr");
+		map_error("map error");
 	if (is_playable(win) == 1)
 		map_error("Map isn't playable");
 	return (0);
