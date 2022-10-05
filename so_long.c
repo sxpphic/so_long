@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:14:39 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/04 15:47:32 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/05 13:50:05 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ int	main(int argc, char *argv[])
 {
 	t_window	win;
 
-	if (argc != 2 || map_name(argv[1]))
-		return (write(2, "error\n", 6));
+	if (argc != 2)
+		map_error("Usage: ./so_long <MAP_PATH>");
+	else if (map_name(argv[1]))
+		map_error("Map extension should be \".ber\"");
 	win.map = map_create(argv[1]);
 	ft_zero(&win);
 	valid_map(&win);

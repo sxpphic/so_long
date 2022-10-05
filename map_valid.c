@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:39:22 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/05 11:32:30 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/05 11:49:22 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,15 @@ int	valid_map(t_window *win)
 	border_valid(win);
 	map_size_verify(win);
 	if (win->p_count != 1 || win->c_count == 0 || 
-				win->e_count != 1 || win->error == 1)
-		map_error("map error");
+				win->e_count != 1)
+	if (win->error == -4)
+		map_error("Your map can't be a square!");
+	if (win->error == -1)
+		map_error("Map can only contain C, P, E, 0 and 1");
+	if (win->error == -2)
+		map_error("Map isn's a rectangle");
 	if (is_playable(win) == 1)
-		map_error("Map isn't playable");
+		map_error("Map path isn't playable");
 	return (0);
 }
 
@@ -111,7 +116,7 @@ void info_count(t_window *win)
 		else if (win->map[j][i] == 'E')
 			win->e_count++;
 		else if (win->map[j][i] != '0' && (win->map[j][i] != '1') && (win->map[j][i] != '\n'))
-			win->error = 1;
+			win->error = -1;
 		if (win->map[j][i] == '\n')
 		{
 			j++;
@@ -140,13 +145,13 @@ void	map_size_verify(t_window *win)
 			if (win->map[j] != NULL)
 				next_len = ft_strlen(win->map[j]);
 			if (line_len != next_len)
-				win->error = 1;
+				win->error = -2;
 			i = 0;
 		}
 		i++;
 	}
 	if (j == line_len -1)
-		win->error = 1;
+		win->error = -4;
 }
 
 int	map_name(char	*map)
