@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_movement.c                                  :+:      :+:    :+:   */
+/*   player_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:46:30 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/04 16:56:12 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/05 09:24:01 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	key_hook(int keycode, t_window *win)
 {
-//	player_possition(win);
 	if (keycode == 13)
 	  move_player(win, 0, -1);
 	else if (keycode == 0)

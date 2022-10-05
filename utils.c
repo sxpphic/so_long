@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:09:41 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/04 17:07:21 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/05 09:13:22 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	print_array(char	**map)
 	ft_printf("\n");
 }*/
 
-size_t	columns_count(char **map)
+size_t	line_count(char **map)
 {
 	int	j;
 
@@ -85,7 +85,7 @@ char	**map_copy(char **map)
 	int	j;
 
 	j = 0;
-	copy = ft_calloc(1, (sizeof(char *) * ft_strlen(map[j]) * columns_count(map)));
+	copy = ft_calloc(1, (sizeof(char *) * ft_strlen(map[j]) * line_count(map)));
 	while (map[j] != NULL)
 	{
 		copy[j] = ft_strdup(map[j]);

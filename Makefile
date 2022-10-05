@@ -4,7 +4,7 @@ SRC = so_long.c\
 	  utils.c\
 	  map_validation.c\
 	  win_map_manage.c\
-	  player_movement.c\
+	  player_move.c\
 	  exit_funcs.c
 
 OBJ			= $(SRC:.c=.o)

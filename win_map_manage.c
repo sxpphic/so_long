@@ -6,11 +6,33 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:48:05 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/04 16:53:47 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/05 09:37:36 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	map_lines(char	*map_path)
+{
+	int	fd;
+	int	i;
+	char	*line;
+
+	i = 0;
+	fd = open(map_path, O_RDWR);
+	if (fd == -1)
+		map_error(); //tratar esse error;
+	line = get_next_line(fd);
+	i++;
+	while (line != NULL)
+	{
+		line = get_next_line(fd);
+		ft_printf("%s", line);
+		i++;
+	}
+	ft_printf("%i\n", i);
+	return (i);
+}
 
 char	**map_create(char	*map_path)
 {
@@ -20,11 +42,11 @@ char	**map_create(char	*map_path)
 	int		i;
 
 	i = 0;
+	map = ft_calloc(sizeof(char *), map_lines(map_path)); // estou mallocando o tamanho errado
 	fd = open(map_path, O_RDWR);
 	if (fd == -1)
 		map_error(); //tratar esse error;
 	line1 = get_next_line(fd);
-	map = ft_calloc(sizeof(char *), ft_strlen(line1) * 10); // estou mallocando o tamanho errado
 	map[i++] = line1;
 	while (1)
 	{

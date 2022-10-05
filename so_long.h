@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 10:03:01 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/04 16:44:41 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/05 09:12:31 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ int		valid_map(t_window *win);
 int		key_hook(int keycode, t_window *win);
 void	ft_zero(t_window *win);
 void	ft_error(t_window *win);
+size_t	line_count(char	**map);
 
 #endif
