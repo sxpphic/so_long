@@ -1,27 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   map_valid_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/27 11:09:41 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/05 09:49:10 by vipereir         ###   ########.fr       */
+/*   Created: 2022/10/05 09:51:01 by vipereir          #+#    #+#             */
+/*   Updated: 2022/10/05 09:52:51 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-size_t	line_count(char **map)
-{
-	int	j;
-
-	j = 0;
-	while (map[j] != NULL)
-		j++;
-	ft_printf("%i\n", j);
-	return (j);
-}
 
 int	collect_count(char **map)
 {
@@ -47,7 +36,7 @@ int	collect_count(char **map)
 char	**map_copy(char **map)
 {
 	char	**copy;
-	int	j;
+	int		j;
 
 	j = 0;
 	copy = ft_calloc(sizeof(char *), line_count(map) + 1);
@@ -57,24 +46,4 @@ char	**map_copy(char **map)
 		j++;
 	}
 	return (copy);
-}
-
-void	ft_free_matrix(char **matrix)
-{
-	int	i;
-
-	i = 0;
-	while (matrix[i])
-		free(matrix[i++]);
-	free(matrix);
-}
-
-void	ft_zero(t_window *win)
-{
-	win->p_count = 0;
-	win->c_count = 0;
-	win->e_count = 0;
-	win->p_count = 0;
-	win->error = 0;
-	win->moves = 0;
 }

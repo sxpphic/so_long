@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:48:05 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/05 09:37:36 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/05 09:55:55 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ int	map_lines(char	*map_path)
 	i++;
 	while (line != NULL)
 	{
+		free(line);
 		line = get_next_line(fd);
-		ft_printf("%s", line);
 		i++;
 	}
-	ft_printf("%i\n", i);
+	free(line);
 	return (i);
 }
 
@@ -42,7 +42,7 @@ char	**map_create(char	*map_path)
 	int		i;
 
 	i = 0;
-	map = ft_calloc(sizeof(char *), map_lines(map_path)); // estou mallocando o tamanho errado
+	map = ft_calloc(sizeof(char *), map_lines(map_path));
 	fd = open(map_path, O_RDWR);
 	if (fd == -1)
 		map_error(); //tratar esse error;

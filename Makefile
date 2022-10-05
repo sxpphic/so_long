@@ -2,7 +2,7 @@ NAME = so_long
 
 SRC = so_long.c\
 	  utils.c\
-	  map_validation.c\
+	  map_valid.c\
 	  win_map_manage.c\
 	  player_move.c\
 	  exit_funcs.c
