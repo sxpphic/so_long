@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 12:22:11 by vipereir          #+#    #+#             */
-/*   Updated: 2022/09/27 10:35:13 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/05 16:57:45 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,5 @@ char	*ft_gnl_rest(char *temp);
 char	*ft_gnl_line(int fd, char *str);
 char	*ft_gnl_cute(char *cute);
 char	*get_next_line(int fd);
-
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:39:22 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/05 14:56:40 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/05 17:09:22 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	valid_map(t_window *win)
 	else if (win->error == -1)
 		map_error("Map can only contain C, P, E, 0 and 1");
 	else if (win->p_count != 1 || win->c_count == 0 || win->e_count != 1)
-		map_error("Your map should have 1 player, 1 exit and at least 1 collectable");
+		map_error("Map should have 1 player, 1 exit and at least 1 collect");
 	else if (win->error == -4)
 		map_error("Your map can't be a square!");
 	else if (win->error == -2)
@@ -56,7 +56,7 @@ int	check_exit(t_window *win, char **map)
 	return (1);
 }
 
-void	iterate_map(char **map, int	i, int	j)
+void	iterate_map(char **map, int i, int j)
 {
 	if (map[j][i + 1] == '0' || map[j][i + 1] == 'C')
 	{
@@ -91,105 +91,14 @@ void	border_valid(t_window *win)
 	while (win->map[0][i] != '\n')
 	{
 		if (win->map[0][i] != '1' || win->map[0][i] != '1')
-			return ft_error(win);
+			return (ft_error(win));
 		i++;
 	}
 	while (win->map[j] != NULL)
 	{
-		if (win->map[j][0] != '1' || win->map[j][win->line_length - 2 ] != '1')
+		if (win->map[j][0] != '1' ||
+			win->map[j][win->line_length - 2] != '1')
 			return (ft_error(win));
 		j++;
 	}
 }
-
-void info_count(t_window *win)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (win->map[j] != NULL)
-	{
-		if (win->map[j][i] == 'P')
-			win->p_count++;
-		else if (win->map[j][i] == 'C')
-			win->c_count++;
-		else if (win->map[j][i] == 'E')
-			win->e_count++;
-		else if (win->map[j][i] != '0' && (win->map[j][i] != '1') && (win->map[j][i] != '\n'))
-			win->error = -1;
-		if (win->map[j][i] == '\n')
-		{
-			j++;
-			i = 0;
-		}
-		i++;
-	}
-}
-
-void	map_size_verify(t_window *win)
-{
-	int	i;
-	int	j;
-	int	line_len;
-	int	next_len;
-
-	i = 0;
-	j = 0;
-	line_len = ft_strlen(win->map[j]);
-	next_len = ft_strlen(win->map[j]);
-	while (win->map[j] != NULL)
-	{
-		if (win->map[j][i] == '\n')
-		{
-			j++;
-			if (win->map[j] != NULL)
-				next_len = ft_strlen(win->map[j]);
-			if (line_len != next_len)
-				win->error = -2;
-			i = 0;
-		}
-		i++;
-	}
-	if (j == line_len -1)
-		win->error = -4;
-}
-
-int	map_name(char	*map)
-{
-	int	len;
-
-	len = ft_strlen(map);
-	while(len > 4)
-	{
-		map++;
-		len--;
-	}
-	return (ft_strncmp(map, ".ber", len));
-}
-
-void	exit_possition(t_window *win)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (win->map[j] != NULL)
-	{
-		if (win->map[j][i] == 'E')
-		{
-			win->e_x = i;
-			win->e_y = j;
-		}
-		i++;
-		if (win->map[j][i] == '\n')
-		{
-			j++;
-			i = 0;
-		}
-	}
-}
-
-

@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:09:41 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/05 11:27:01 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/05 16:58:04 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	collect_count(char **map)
 char	**map_copy(char **map)
 {
 	char	**copy;
-	int	j;
+	int		j;
 
 	j = 0;
 	copy = ft_calloc(sizeof(char *), line_count(map) + 1);

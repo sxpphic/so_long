@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:48:05 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/05 14:44:38 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/05 17:10:19 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,3 @@ void	create_win(t_window *win)
 		y++;
 	win->win = mlx_new_window(win->mlx, (x * 64), (y * 64), "so_long");
 }
-
-

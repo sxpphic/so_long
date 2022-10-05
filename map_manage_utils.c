@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:43:57 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/05 14:44:44 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/05 17:09:58 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	map_lines(char	*map_path)
 {
-	int	fd;
-	int	i;
+	int		fd;
+	int		i;
 	char	*line;
 
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 10:03:01 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/05 14:45:33 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/05 16:59:56 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,13 @@ char	**map_create(char	*map_path);
 /* sprite put */
 void	put_sprite(t_window *win, char *path, int x, int y);
 
-
 /* print map funcs */
 void	initialize_line_row(int *i, int *j, int *x, int *y);
 void	set_values(int *i, int *j, int *x, int *y);
 void	print_map(t_window *win);
 void	create_win(t_window *win);
 
- /* move player */
+/* move player */
 void	player_possition(t_window *win);
 int		key_hook(int keycode, t_window *win);
 void	move_player(t_window *win, int x, int y);
@@ -66,12 +65,11 @@ void	info_count(t_window *win);
 void	map_size_verify(t_window *win);
 void	exit_possition(t_window *win);
 
-
 void	map_error(char *err);
 void	print_array(char	**map);
 size_t	columns_count(char **map);
 char	**map_copy(char **map);
-void	iterate_map(char **map, int	i, int	j);
+void	iterate_map(char **map, int i, int j);
 int		check_exit(t_window *win, char **map);
 int		collect_count(char **map);
 void	ft_free_matrix(char **matrix);
