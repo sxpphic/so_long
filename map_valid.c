@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:39:22 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/04 17:08:02 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/05 11:23:49 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	valid_map(t_window *win)
 	map_size_verify(win);
 	if (win->p_count != 1 || win->c_count == 0 || 
 				win->e_count != 1 || win->error == 1)
-		map_error();
+		map_error("map errorr");
 	if (is_playable(win) == 1)
-		map_error();
+		map_error("Map isn't playable");
 	return (0);
 }
 
@@ -32,7 +32,6 @@ int	is_playable(t_window *win)
 	player_possition(win);
 	temp = map_copy(win->map);
 	iterate_map(temp, win->p_x, win->p_y);
-//	print_array(temp);
 	if (check_exit(win, temp) == 1 || collect_count(temp) == 1)
 		return (1);
 	ft_free_matrix(temp);

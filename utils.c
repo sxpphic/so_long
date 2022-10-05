@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:09:41 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/05 09:49:10 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/05 11:27:01 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ size_t	line_count(char **map)
 	j = 0;
 	while (map[j] != NULL)
 		j++;
-	ft_printf("%i\n", j);
 	return (j);
 }
 

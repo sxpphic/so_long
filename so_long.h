@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 10:03:01 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/05 09:12:31 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/05 11:21:16 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	ft_win(void);
 /* close funcs*/
 
 int		close_x(void);
-void	map_error(void);
 
 /* map verify */
 
@@ -68,7 +67,7 @@ void	map_size_verify(t_window *win);
 void	exit_possition(t_window *win);
 
 
-void	map_error(void);
+void	map_error(char *err);
 void	print_array(char	**map);
 size_t	columns_count(char **map);
 char	**map_copy(char **map);
@@ -82,5 +81,6 @@ int		key_hook(int keycode, t_window *win);
 void	ft_zero(t_window *win);
 void	ft_error(t_window *win);
 size_t	line_count(char	**map);
+int		map_lines(char	*map_path);
 
 #endif

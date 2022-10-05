@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 17:06:20 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/04 17:06:38 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/05 11:17:34 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,12 @@ void	ft_error(t_window *win)
 	return ;
 }
 
-void	map_error(void)
+void	map_error(char *err)
 {
 	ft_putstr_fd("\033[22;31mError\n\033[0m", 2);
-	ft_putstr_fd("\033[22;31mMap error\n\033[0m", 2);
+	ft_putstr_fd("\033[22;31m", 2);
+	ft_putstr_fd(err, 2);
+	ft_putstr_fd("\n", 2);
+	ft_putstr_fd("\033[0m", 2);
 	exit(0);
 }
