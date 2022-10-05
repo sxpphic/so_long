@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:48:05 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/05 11:22:52 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/05 14:44:38 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,13 @@ char	**map_create(char	*map_path)
 	i = 0;
 	map = ft_calloc(sizeof(char *), map_lines(map_path));
 	fd = open(map_path, O_RDWR);
-	//if (fd == -1)
-	//	map_error(); //tratar esse error;
 	line1 = get_next_line(fd);
+	if (ft_strlen(line1) < 3)
+	{
+		free(line1);
+		free(map);
+		map_error("Map too small");
+	}
 	map[i++] = line1;
 	while (1)
 	{
@@ -37,28 +41,6 @@ char	**map_create(char	*map_path)
 	return (map);
 }
 
-int	map_lines(char	*map_path)
-{
-	int	fd;
-	int	i;
-	char	*line;
-
-	i = 0;
-	fd = open(map_path, O_RDWR);
-	if (fd == -1)
-		map_error("File not found"); //tratar esse error;
-	line = get_next_line(fd);
-	i++;
-	while (line != NULL)
-	{
-		free(line);
-		line = get_next_line(fd);
-		i++;
-	}
-	free(line);
-	return (i);
-}
-
 void	put_sprite(t_window *win, char *path, int x, int y)
 {
 	void	*img;
@@ -68,22 +50,6 @@ void	put_sprite(t_window *win, char *path, int x, int y)
 	img = mlx_xpm_file_to_image(win->mlx, path, &img_width, &img_height);
 	mlx_put_image_to_window(win->mlx, win->win, img, x, y);
 	mlx_destroy_image(win->mlx, img);
-}
-
-void	set_values(int *i, int *j, int *x, int *y)
-{
-	(*i) = 0;
-	(*j)++;
-	(*y) += 64;
-	(*x) = 0;
-}
-
-void	initialize_line_row(int *i, int *j, int *x, int *y)
-{
-	(*i) = 0;
-	(*j) = 0;
-	(*y) = 0;
-	(*x) = 0;
 }
 
 void	print_map(t_window *win)

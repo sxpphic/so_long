@@ -4,6 +4,7 @@ SRC = so_long.c\
 	  utils.c\
 	  map_valid.c\
 	  map_manage.c\
+	  map_manage_utils.c\
 	  player_move.c\
 	  exit_funcs.c
 

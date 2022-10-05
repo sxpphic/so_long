@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 10:03:01 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/05 11:21:16 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/05 14:45:33 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,8 @@ void	ft_zero(t_window *win);
 void	ft_error(t_window *win);
 size_t	line_count(char	**map);
 int		map_lines(char	*map_path);
+int		map_lines(char	*map_path);
+void	set_values(int *i, int *j, int *x, int *y);
+void	initialize_line_row(int *i, int *j, int *x, int *y);
 
 #endif

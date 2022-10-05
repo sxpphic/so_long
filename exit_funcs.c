@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 17:06:20 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/05 13:49:45 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/05 14:56:56 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	close_x(void)
 
 void	ft_error(t_window *win)
 {
-	win->error = 1;
+	win->error = -3;
 	return ;
 }
 
