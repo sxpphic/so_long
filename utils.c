@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 11:09:41 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/05 16:58:04 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/06 10:41:16 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void	ft_zero(t_window *win)
 	win->p_count = 0;
 	win->c_count = 0;
 	win->e_count = 0;
-	win->p_count = 0;
 	win->error = 0;
 	win->moves = 0;
 }
