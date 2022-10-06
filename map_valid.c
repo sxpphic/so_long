@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:39:22 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/05 17:09:22 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/06 09:31:45 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ int	valid_map(t_window *win)
 	info_count(win);
 	map_size_verify(win);
 	if (win->error == -3)
-		map_error("Map borders shold be 1");
+		map_error_free("Map borders shold be 1", win);
 	else if (win->error == -1)
-		map_error("Map can only contain C, P, E, 0 and 1");
+		map_error_free("Map can only contain C, P, E, 0 and 1", win);
 	else if (win->p_count != 1 || win->c_count == 0 || win->e_count != 1)
-		map_error("Map should have 1 player, 1 exit and at least 1 collect");
+		map_error_free("Map should have 1 'P', 1 'E' and at least 1 'C'", win);
 	else if (win->error == -4)
-		map_error("Your map can't be a square!");
+		map_error_free("Your map can't be a square!", win);
 	else if (win->error == -2)
-		map_error("Map isn's a rectangle");
+		map_error_free("Map isn's a rectangle", win);
 	else if (is_playable(win) == 1)
-		map_error("Map path isn't playable");
+		map_error_free("Map path isn't playable", win);
 	return (0);
 }
 

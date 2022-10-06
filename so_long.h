@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 10:03:01 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/05 16:59:56 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/06 09:22:54 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,12 @@ int		key_hook(int keycode, t_window *win);
 void	move_player(t_window *win, int x, int y);
 
 /* others */
-void	ft_win(void);
+void	ft_win(t_window *win);
 
 /* close funcs*/
 
-int		close_x(void);
+int		close_x(t_window *win);
+void	map_error_free(char *err, t_window *win);
 
 /* map verify */
 
