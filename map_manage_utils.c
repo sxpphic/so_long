@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:43:57 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/05 17:09:58 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/06 11:05:57 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,23 @@ void	initialize_line_row(int *i, int *j, int *x, int *y)
 	(*j) = 0;
 	(*y) = 0;
 	(*x) = 0;
+}
+
+void	ft_free_matrix(char **matrix)
+{
+	int	i;
+
+	i = 0;
+	while (matrix[i])
+		free(matrix[i++]);
+	free(matrix);
+}
+
+void	ft_zero(t_window *win)
+{
+	win->p_count = 0;
+	win->c_count = 0;
+	win->e_count = 0;
+	win->error = 0;
+	win->moves = 0;
 }

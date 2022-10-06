@@ -1,9 +1,9 @@
 NAME = 			so_long
 
 SRC = 			so_long.c\
-				utils.c\
 				map_valid.c\
 				map_valid_utils.c\
+				map_valid_utils2.c\
 				map_manage.c\
 				map_manage_utils.c\
 				player_move.c\
