@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:46:30 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/06 09:06:01 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/06 09:40:22 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	key_hook(int keycode, t_window *win)
 		move_player(win, +1, 0);
 	else if (keycode == 53)
 		close_x(win);
+	mlx_clear_window(win->mlx, win->win);
 	print_map(win);
 	return (0);
 }
