@@ -6,7 +6,7 @@
 /*   By: vipereir <vipereir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:39:22 by vipereir          #+#    #+#             */
-/*   Updated: 2022/10/06 09:31:45 by vipereir         ###   ########.fr       */
+/*   Updated: 2022/10/06 11:36:57 by vipereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ int	is_playable(t_window *win)
 	temp = map_copy(win->map);
 	iterate_map(temp, win->p_x, win->p_y);
 	if (check_exit(win, temp) == 1 || collect_count(temp) == 1)
+	{
+		ft_free_matrix(temp);
 		return (1);
+	}
 	ft_free_matrix(temp);
 	return (0);
 }
@@ -86,14 +89,15 @@ void	border_valid(t_window *win)
 	int	j;
 
 	i = 0;
-	j = 0;
+	j = line_count(win->map) - 1;
 	win->line_length = ft_strlen(win->map[0]);
 	while (win->map[0][i] != '\n')
 	{
-		if (win->map[0][i] != '1' || win->map[0][i] != '1')
+		if (win->map[0][i] != '1' || win->map[j][i] != '1')
 			return (ft_error(win));
 		i++;
 	}
+	j = 0;
 	while (win->map[j] != NULL)
 	{
 		if (win->map[j][0] != '1' ||
