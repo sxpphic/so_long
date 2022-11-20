@@ -1,4 +1,4 @@
-NAME = 			so_long
+NAME = so_long
 
 SRC = 			so_long.c\
 				map_valid.c\
@@ -9,41 +9,53 @@ SRC = 			so_long.c\
 				player_move.c\
 				exit_funcs.c
 
-OBJ			= 	$(SRC:.c=.o)
+OBJ			= $(SRC:.c=.o)
 
 %.o: %.c
-				$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
+	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
 
-CFLAGS = 		-Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
-INCLUDE_M = 	-Lmlx -lmlx -framework OpenGL -framework AppKit
+INCLUDE_M = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
-CC = 			cc
+INCLUDE_L= -L ./mlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
-RM = 			rm -f
+CC = cc
 
-LIBFT = 		./libft/libft.a
+RM = rm -f
 
-MLX = 			./mlx/libmlx.a
+LIBFT = ./libft/libft.a
+
+MLX = ./mlx/libmlx.a
+
+MLX_LINUX = ./mlx_linux/libmlx.a
+
 
 $(NAME):		$(SRC) $(MLX) $(LIBFT)
-					$(CC) $(CFLAGS) $(SRC) $(LIBFT) $(INCLUDE_M) -o $(NAME)
+				$(CC) $(CFLAGS) $(SRC) $(LIBFT) $(INCLUDE_M) -o $(NAME)
+
+l:			$(SRC) $(MLX_LINUX) $(LIBFT)
+				$(CC) $(CFLAGS) $(SRC) $(LIBFT) $(INCLUDE_L) -o $(NAME)
 
 $(LIBFT):
-				make -C ./libft
+			make -C ./libft
 
 $(MLX):
-				make -C ./mlx
+			make -C ./mlx
 
-all:			$(NAME)
+$(MLX_LINUX):
+			make -C ./mlx_linux
+
+all:	$(NAME)
 
 clean:
-				make clean -C ./mlx
-				make clean -C ./libft
+		$(RM) $(NAME)
+		make clean -C ./mlx
+		make clean -C ./libft
 
-fclean:			clean
-				$(RM) $(NAME)
-				make fclean -C ./libft
+fclean: clean
+		$(RM) $(NAME)
+		make fclean -C ./libft
 
 re: fclean all
 
