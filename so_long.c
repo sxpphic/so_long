@@ -26,7 +26,7 @@ int	main(int argc, char *argv[])
 	win.mlx = mlx_init();
 	create_win(&win);
 	print_map(&win);
-	mlx_hook(win.win, 17, 0, close_x, &win);
+	mlx_hook(win.win, CLICK_X, 0, close_x, &win);
 	mlx_key_hook(win.win, key_hook, &win);
 	mlx_loop(win.mlx);
 	return (0);

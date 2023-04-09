@@ -1,6 +1,9 @@
 # Prerequisites
 *.d
 
+# program bin
+so_long
+
 # Object files
 *.o
 *.ko

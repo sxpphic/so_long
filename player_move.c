@@ -14,20 +14,15 @@
 
 int	key_hook(int keycode, t_window *win)
 {
-	//if (keycode == 13)
-	if (keycode == 119)
+	if (keycode == KEY_UP)
 		move_player(win, 0, -1);
-	//else if (keycode == 0)
-	else if (keycode == 97)
+	else if (keycode == KEY_LEFT)
 		move_player(win, -1, 0);
-	//else if (keycode == 1)
-	else if (keycode == 115)
+	else if (keycode == KEY_DOWN)
 		move_player(win, 0, +1);
-	//else if (keycode == 2)
-	else if (keycode == 100)
+	else if (keycode == KEY_RIGHT)
 		move_player(win, +1, 0);
-	//else if (keycode == 53)
-	else if (keycode == 65307)
+	else if (keycode == KEY_ESC)
 		close_x(win);
 //	mlx_clear_window(win->mlx, win->win);
 	print_map(win);

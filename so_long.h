@@ -17,6 +17,32 @@
 # include "libft/libft.h"
 # include <fcntl.h>
 
+# ifdef __linux__ //linux keymaps
+
+enum {
+	CLICK_X = 17,
+	KEY_ESC = 65307,
+	// movement based on WASD standard
+	KEY_UP = 119,	// W
+	KEY_LEFT = 97,	// A
+	KEY_DOWN = 115,	// S
+	KEY_RIGHT = 100	// D
+};
+
+# elif defined(__APPLE__) // mac keymaps
+
+enum {   //verificar os valores no mac
+	CLICK_X = 17,
+	KEY_ESC = 53,
+	// movement based on WASD standard
+	KEY_UP = 13,	// W
+	KEY_LEFT = 0,	// A
+	KEY_DOWN = 1,	// S
+	KEY_RIGHT = 2	// D
+};
+
+# endif
+
 typedef struct s_window {
 	char	**map;
 	void	*mlx;
