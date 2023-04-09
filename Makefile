@@ -29,7 +29,7 @@ ifeq ($(shell uname -s), Darwin)
 else
 	INCLUDES	= -L ./mlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 	MLX		 = ./mlx_linux/libmlx.a
-	MLX_FOLDER	= ./mlx
+	MLX_FOLDER	= ./mlx_linux
 endif
 
 $(NAME):		$(SRC) $(MLX) $(LIBFT)
